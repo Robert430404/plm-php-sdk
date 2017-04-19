@@ -1,0 +1,16 @@
+{
+    "name": "robert430404/plm-php-sdk",
+    "description": "This is a SDK written for Payday Loan Manager which is a Payday Loan software developed by Infinity",
+    "type": "library",
+    "require": {
+        "phpunit/phpunit": "^6.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Robert Cox",
+            "email": "robert@studiorclv.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
