@@ -2,6 +2,7 @@
 
 namespace Robert430404\PlmSdk\Endpoints\Create;
 
+use SoapFault;
 use stdClass;
 use SoapClient;
 use Robert430404\PlmSdk\Contracts\Entity;
@@ -16,11 +17,6 @@ use Robert430404\PlmSdk\Contracts\Endpoint;
 class Loan implements Endpoint
 {
     /**
-     * @var string
-     */
-    private $apikey;
-
-    /**
      * @var SoapClient
      */
     private $soapClient;
@@ -32,21 +28,19 @@ class Loan implements Endpoint
      */
     public function __construct(Client $client)
     {
-        $this->apikey     = $client->getApiKey();
         $this->soapClient = $client->getSoapClient();
     }
 
     /**
      * Sends the operation to the Infinity servers for processing
      *
-     * @return stdClass
+     * @return stdClass  This is the response given from the SoapClient upon a successful request
+     * @throws SoapFault Can throw a SoapFault if there is an error with the request body
      */
     public function sendOperation(Entity $entity): stdClass
     {
-        $result = $this->soapClient->CreateLoan(
+        return $this->soapClient->CreateLoan(
             $entity->toArray()
         );
-
-        return $result;
     }
 }

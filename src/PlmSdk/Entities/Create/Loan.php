@@ -37,7 +37,7 @@ class Loan implements Entity
     private $fundingType;
 
     /**
-     * @var float
+     * @var string
      */
     private $amount;
 
@@ -49,6 +49,8 @@ class Loan implements Entity
     /**
      * Loan constructor.
      *
+     * Creates an Entity representing the provided data.
+     *
      * @param array $data
      */
     public function __construct(array $data)
@@ -58,12 +60,14 @@ class Loan implements Entity
         $this->storeId     = $data['storeId'];
         $this->loanTypeId  = $data['loanTypeId'];
         $this->fundingType = $data['loanApplication']['FundingType'];
-        $this->fundingType = $data['loanApplication']['Amount'];
+        $this->fundingType = money_format('%i', $data['loanApplication']['Amount']);
         $this->fundingType = $data['loanApplication']['PromotionalCode'];
     }
 
     /**
      * Returns an array representation of the data
+     *
+     * This method returns the data formatted for use with the Infinity API
      *
      * @return array
      */
@@ -123,9 +127,9 @@ class Loan implements Entity
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getAmount(): float
+    public function getAmount(): string
     {
         return $this->amount;
     }
